@@ -27,7 +27,7 @@ I imported two csv files of [Uchida Lab dataset](https://github.com/uchidalab/bo
 - `book30-listing-train.csv` : The csv file containing 51,300 rows for training dataset.
 - `book30-listing-test.csv` : The csv file containing 5,700 rows for testing dataset.
 
-I already created the image dataset from urls included in the csv files above for training and testing.
+I already created the image dataset from urls included in the csv files above for training and testing. (But, if you want, you can also download the image files with the file "load_images.py" I uploaded with.)
 
 So download that image dataset from the urls below and also save it to `Judging-a-Book-by-its-Cover/dataset`.
 
