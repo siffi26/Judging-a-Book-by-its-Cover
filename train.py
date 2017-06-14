@@ -186,11 +186,12 @@ def train():
 		ckpt = tf.train.get_checkpoint_state(FLAGS.train_models)
 		if ckpt and ckpt.model_checkpoint_path:
 			saver.restore(sess, ckpt.model_checkpoint_path)
+			print("restore done , global_step = %d", global_step)
 
 		from datetime import datetime
 		start_time_str = datetime.now().strftime('%Y-%m-%d %H:%M')
 
-		for i in range(FLAGS.iterations):
+		for i in range(global_step,FLAGS.iterations):
 			x, train_labels = features_from_data(data_list[i % TRAINING_SIZE])
 			train_step.run(feed_dict={x_: x, y_: train_labels, keep_prob: 0.5})
 
@@ -206,6 +207,7 @@ def train():
 			if i % 5000 == 0:
 				model_path = os.path.join(FLAGS.train_models,'model.ckpt')
 				saver.save(sess,model_path,global_step=global_step)
+				print("checkpoint saved")
 
 		model_path = os.path.join(FLAGS.train_models, 'model.ckpt')
 		saver.save(sess,model_path,global_step=global_step)
