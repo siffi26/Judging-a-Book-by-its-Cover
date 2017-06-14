@@ -186,12 +186,12 @@ def train():
 		ckpt = tf.train.get_checkpoint_state(FLAGS.train_models)
 		if ckpt and ckpt.model_checkpoint_path:
 			saver.restore(sess, ckpt.model_checkpoint_path)
-			print("restore done , global_step = %s", tf.train.global_step(sess, global_step))
+			print("restore done , global_step = %d" % sess.eval(global_step) )#tf.train.global_step(sess, global_step))
 
 		from datetime import datetime
 		start_time_str = datetime.now().strftime('%Y-%m-%d %H:%M')
 
-		for i in range(global_step,FLAGS.iterations):
+		for i in range(sess.eval(global_step)+1,FLAGS.iterations):
 			x, train_labels = features_from_data(data_list[i % TRAINING_SIZE])
 			train_step.run(feed_dict={x_: x, y_: train_labels, keep_prob: 0.5})
 
