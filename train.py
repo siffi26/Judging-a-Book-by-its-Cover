@@ -193,7 +193,7 @@ def train():
 
 		for i in range(sess.run(global_step)+1,FLAGS.iterations):
 			x, train_labels = features_from_data(data_list[i % TRAINING_SIZE])
-			#train_step.run(feed_dict={x_: x, y_: train_labels, keep_prob: 0.5})
+			train_step.run(feed_dict={x_: x, y_: train_labels, keep_prob: 0.5})
 
 			current_time_str = datetime.now().strftime('%Y-%m-%d %H:%M')
 
@@ -208,8 +208,6 @@ def train():
 				model_path = os.path.join(FLAGS.train_models,'model.ckpt')
 				saver.save(sess,model_path,global_step=global_step)
 				print("checkpoint saved")
-
-			train_step.run(feed_dict={x_: x, y_: train_labels, keep_prob: 0.5})
 
 		model_path = os.path.join(FLAGS.train_models, 'model.ckpt')
 		saver.save(sess,model_path,global_step=global_step)
