@@ -186,7 +186,7 @@ def train():
 		ckpt = tf.train.get_checkpoint_state(FLAGS.train_models)
 		if ckpt and ckpt.model_checkpoint_path:
 			saver.restore(sess, ckpt.model_checkpoint_path)
-			print("restore done , global_step = %d", global_step)
+			print("restore done , global_step = %d", sess.run(global_step))
 
 		from datetime import datetime
 		start_time_str = datetime.now().strftime('%Y-%m-%d %H:%M')
