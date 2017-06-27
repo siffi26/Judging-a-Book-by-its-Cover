@@ -2,7 +2,6 @@ import tensorflow as tf
 from train import get_data,features_from_data, PretrainedAlexNet
 
 flags = tf.app.flags
-flags.DEFINE_string("train_models","./train_models","path to save checkpoints")
 FLAGS = flags.FLAGS
 
 
@@ -16,19 +15,18 @@ def classified_data():
         class_names.append(total_data[total_data.CATEGORY_ID == i].CATEGORY.values[0])
     return classified_data_list, class_names
 
-TEST_SIZE = 57
-CLASS_SIZE = 30
-data_list, class_names = classified_data()
-total_accuracy = 0
-total_top3_accuracy = 0
-total_top2_accuracy = 0
-class_top1_accuracy = []
-class_top2_accuracy = []
-class_top3_accuracy = []
-
 
 def test():
     test_data_list, class_names = classified_data()
+    #TEST_SIZE = 57
+    CLASS_SIZE = 30
+    data_list, class_names = classified_data()
+    total_accuracy = 0
+    total_top3_accuracy = 0
+    total_top2_accuracy = 0
+    class_top1_accuracy = []
+    class_top2_accuracy = []
+    class_top3_accuracy = []
 
     with tf.Session() as sess:
         x_ = tf.placeholder(tf.float32, [None, 227, 227, 3])
@@ -63,10 +61,10 @@ def test():
             top2 = sess.run(accuracy2, feed_dict={x_: test_x, y_: test_labels, keep_prob: 1.0})
             top3 = sess.run(accuracy3, feed_dict={x_: test_x, y_: test_labels, keep_prob: 1.0})
 
-            print("test accuracy %f" % (accuracy.eval(feed_dict={x_: x, y_: labels, keep_prob: 1.0})))
-            print("top1_current test accuracy %f" % (top1))
-            print("top2_current test accuracy %f" % (top2))
-            print("top3_current test accuracy %f\n" % (top3))
+            print("test_accuracy %f" % (accuracy.eval(feed_dict={x_: test_x, y_: test_labels, keep_prob: 1.0})))
+            print("top1_accuracy %f" % (top1))
+            print("top2_accuracy %f" % (top2))
+            print("top3_accuracy %f\n" % (top3))
 
             total_accuracy = total_accuracy + top1
             total_top2_accuracy = total_top2_accuracy + top2
@@ -78,10 +76,7 @@ def test():
 
     print('top1 avg=' + str(total_accuracy / CLASS_SIZE) + '\ntop2 avg=' + str(
         total_top2_accuracy / CLASS_SIZE) + '\ntop3 avg=' + str(total_top3_accuracy / CLASS_SIZE))
-    print('\n')
-    for i in range(30):
-        print(class_names[i] + ' : top1_accuracy = ' + str(class_top1_accuracy[i]) + ' , top2_accuracy = '
-              + str(class_top2_accuracy[i]) + '≈ , top3_accuracy = ' + str(class_top3_accuracy[i]))
+
 
 def main(argv=None):
     #if not tf.gfile.Exists(FLAGS.test_models):

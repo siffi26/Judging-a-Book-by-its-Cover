@@ -137,8 +137,10 @@ def loadImages(fnames,is_test):
 		path = os.getcwd() + "/dataset/test_images/"
 	loadedImages = []
 	for image in fnames:
-		img = Image.open(path + image)
+		tmp = Image.open(path + image)
+		img = tmp.copy()
 		loadedImages.append(img)
+		tmp.close()
 	return loadedImages
 
 
@@ -214,28 +216,27 @@ def train():
 		sess.run(tf.global_variables_initializer())
 
 		data_list = np.array_split(get_data(),TRAINING_SIZE)
+		test_data = get_data(is_test=True)
+		test_x, test_labels = features_from_data(test_data, is_test=True)
 
 		saver = tf.train.Saver(var_list=tf.trainable_variables())
 		ckpt = tf.train.get_checkpoint_state(FLAGS.train_models)
 		if ckpt and ckpt.model_checkpoint_path:
 			saver.restore(sess, ckpt.model_checkpoint_path)
-			print("restore done , global_step = %d" % sess.run(global_step) )
 
 		for i in range(sess.run(global_step)+1,FLAGS.iterations):
 			x, train_labels = features_from_data(data_list[i % TRAINING_SIZE])
 			train_step.run(feed_dict={x_: x, y_: train_labels, keep_prob: 0.5})
 
-			if i % 100 == 0: # if i % 100 == 0:
+			if i % 100 == 0:
 				summary = sess.run(merged, feed_dict={x_: x, y_: train_labels, keep_prob: 1.0})
 				train_writer.add_summary(summary, i)
 
-				test_data = get_data(is_test=True)
-				test_x, test_labels = features_from_data(test_data, is_test=True)
 				test_merged = tf.summary.merge([accuracy1_summary, accuracy2_summary, accuracy3_summary])
 				test_summary = sess.run(test_merged, feed_dict={x_: test_x, y_: test_labels, keep_prob: 1.0})
 				test_writer.add_summary(test_summary, i)
 
-			if i % 5000 == 0: #if i % 5000 == 0:
+			if i % 5000 == 0:
 				model_path = os.path.join(FLAGS.train_models,'model.ckpt')
 				saver.save(sess,model_path,global_step=global_step)
 
@@ -244,6 +245,11 @@ def train():
 
 
 def main(argv=None):
+	"""
+	if tf.gfile.Exists(FLAGS.log_dir):
+		tf.gfile.DeleteRecursively(FLAGS.log_dir)
+	tf.gfile.MakeDirs(FLAGS.log_dir)
+	"""
 	if not tf.gfile.Exists(FLAGS.train_models):
 		tf.gfile.MakeDirs(FLAGS.train_models)
 	train()
