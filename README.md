@@ -79,7 +79,27 @@ python test.py
 The paper compares the performances of two networks : `AlexNet` and `LeNet(for a comparison)` and I implemented AlexNet only.
 ### AlexNet
 
-- Training will be done soon.
+Over 180,000 iterations,
+
+- Cross Entropy
+![alt tag](cross_entropy.png)
+
+
+- Learning Rate
+
+![alt tag](learning_rate.png)
+
+
+The orange line represents the test accuracy.
+
+- TOP 1 Accuracy
+![alt tag](top1_accuracy.png)
+
+- TOP 2 Accuracy
+![alt tag](top2_accuracy.png)
+
+- TOP 3 Accuracy
+![alt tag](top3_accuracy.png)
 
 ### LeNet
 To be implemented soon.
