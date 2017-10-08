@@ -31,7 +31,7 @@ I already created the image dataset from urls included in the csv files above fo
 
 So download that image dataset from the urls below and also save it to `Judging-a-Book-by-its-Cover/dataset`.
 
-[train_images](https://drive.google.com/uc?id=0B3F_hHS5uhRMRVpRWW5QRWJxTjQ&export=download) , [test_images](https://drive.google.com/uc?id=0B3F_hHS5uhRMTlYybVlYYVAwYmM&export=download)
+[train_images](https://drive.google.com/uc?id=0B3F_hHS5uhRMaTZmd29SOE9GZ00&export=download) , [test_images](https://drive.google.com/uc?id=0B3F_hHS5uhRMTlYybVlYYVAwYmM&export=download)
 
     cd Judging-a-Book-by-its-Cover
     cd dataset
