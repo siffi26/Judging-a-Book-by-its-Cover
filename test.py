@@ -57,15 +57,16 @@ def test():
         for i in range(CLASS_SIZE):
             test_x, test_labels = features_from_data(test_data_list[i], is_test=True)
             print(class_names[i])
-            top1 = sess.run(accuracy1, feed_dict={x_: test_x, y_: test_labels, keep_prob: 1.0})
-            top2 = sess.run(accuracy2, feed_dict={x_: test_x, y_: test_labels, keep_prob: 1.0})
-            top3 = sess.run(accuracy3, feed_dict={x_: test_x, y_: test_labels, keep_prob: 1.0})
+            #top1 = sess.run(accuracy1, feed_dict={x_: test_x, y_: test_labels, keep_prob: 1.0})
+            #top2 = sess.run(accuracy2, feed_dict={x_: test_x, y_: test_labels, keep_prob: 1.0})
+            #top3 = sess.run(accuracy3, feed_dict={x_: test_x, y_: test_labels, keep_prob: 1.0})
 
             print("test_accuracy %f" % (accuracy.eval(feed_dict={x_: test_x, y_: test_labels, keep_prob: 1.0})))
-            print("top1_accuracy %f" % (top1))
-            print("top2_accuracy %f" % (top2))
-            print("top3_accuracy %f\n" % (top3))
+            print("top1_accuracy %f" % (accuracy1.eval(feed_dict={x_: test_x, y_: test_labels, keep_prob: 1.0})))
+            print("top2_accuracy %f" % (accuracy2.eval(feed_dict={x_: test_x, y_: test_labels, keep_prob: 1.0})))
+            print("top3_accuracy %f\n" % (accuracy3.eval(feed_dict={x_: test_x, y_: test_labels, keep_prob: 1.0})))
 
+            """
             total_accuracy = total_accuracy + top1
             total_top2_accuracy = total_top2_accuracy + top2
             total_top3_accuracy = total_top3_accuracy + top3
@@ -73,9 +74,10 @@ def test():
             class_top1_accuracy.append(top1)
             class_top2_accuracy.append(top2)
             class_top3_accuracy.append(top3)
+            """
 
-    print('top1 avg=' + str(total_accuracy / CLASS_SIZE) + '\ntop2 avg=' + str(
-        total_top2_accuracy / CLASS_SIZE) + '\ntop3 avg=' + str(total_top3_accuracy / CLASS_SIZE))
+    #print('top1 avg=' + str(total_accuracy / CLASS_SIZE) + '\ntop2 avg=' + str(
+    #    total_top2_accuracy / CLASS_SIZE) + '\ntop3 avg=' + str(total_top3_accuracy / CLASS_SIZE))
 
 
 def main(argv=None):
