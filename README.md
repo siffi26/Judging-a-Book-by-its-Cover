@@ -2,7 +2,7 @@
 
 A Tensorflow implementation of the paper : [Judging a Book by its Cover](https://arxiv.org/pdf/1610.09204) that classifies the genres of books by its covers.
 
-![alt tag](Judging-a-Book-by-its-Cover.jpg)
+![alt tag](https://i.imgur.com/1ZxCnAR.png)
 
 ## Prerequisites
 
@@ -82,19 +82,19 @@ The paper compares the performances of two networks : `AlexNet` and `LeNet(for a
 Over 180,000 iterations,
 
 
-![alt tag](cross_entropy.png)
+![alt tag](https://i.imgur.com/Fcl53i1.png)
 
 
-![alt tag](learning_rate.png)
+![alt tag](https://i.imgur.com/NHfalpg.png)
 
 
 The orange line represents the test accuracy.
 
-![alt tag](top1_accuracy.png)
+![alt tag](https://i.imgur.com/LjUp60b.png)
 
-![alt tag](top2_accuracy.png)
+![alt tag](https://i.imgur.com/LC9Llzv.png)
 
-![alt tag](top3_accuracy.png)
+![alt tag](https://i.imgur.com/7wImpr0.png)
 
 ### LeNet
 To be implemented soon.
